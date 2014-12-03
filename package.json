@@ -1,0 +1,12 @@
+{
+  "name": "gulp-for-molecule-game",
+  "version": "0.0.1",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "~3.8.8",
+    "gulp-sourcemaps": "~1.2.7",
+    "gulp-coffee": "~2.2.0",
+    "gulp-util": "*",
+    "gulp-jsbeautifier": "0.0.4"
+  }
+}
