@@ -2,3 +2,4 @@ node_modules/*
 coffee/*.js
 git/*
 .DB_Store
+.idea/*

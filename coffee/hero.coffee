@@ -17,7 +17,6 @@ Molecule.module 'Hero', (game)->
 
                     @sprite.animation.add 'hit', {frames: [18, 19, 20, 21, 22], speed: 0.5 }
 
-                    @sprite.collides.group = 1
                     @sprite.collides.boundaries = on
 
                     do @sprite.animation.stop
@@ -38,24 +37,24 @@ Molecule.module 'Hero', (game)->
                 update: ->
                     if game.input.key.SPACE
                         #  hit
-                        @sprite.animation.run 'hit', loop: on
+                        @sprite.animation.run 'hit', {loop: on}
 
                     else if game.input.key.LEFT_ARROW
                         @sprite.flip.x = no
-                        @sprite.animation.run 'run', loop: on
+                        @sprite.animation.run 'run', {loop: on}
                         @sprite.position.x -= 3
 
                     else if game.input.key.RIGHT_ARROW
                         @sprite.flip.x = on
-                        @sprite.animation.run 'run', loop: on
+                        @sprite.animation.run 'run', {loop: on}
                         @sprite.position.x += 3
 
                     if game.input.key.DOWN_ARROW
-                        @sprite.animation.run 'sit', loop: no
+                        @sprite.animation.run 'sit', {loop: no}
                         @sprite.position.y += 3
 
                     if game.input.key.UP_ARROW
-                        @sprite.animation.run 'jump', loop: no
+                        @sprite.animation.run 'jump', {loop: no}
                         @sprite.position.y -= 3
 
                     if !game.input.key.LEFT_ARROW && !game.input.key.RIGHT_ARROW && !game.input.key.SPACE && !game.input.key.DOWN_ARROW && !game.input.key.UP_ARROW
