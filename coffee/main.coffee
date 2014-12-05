@@ -11,6 +11,11 @@ Molecule
 # .sprite 'boomOnEarth', 'media/sprites/boom_on_earth.png', 65.6, 81
 
 .ready (game)->
+    game.boundaries.x = 0
+    game.boundaries.y = 0
+    game.boundaries.width = game.width
+    game.boundaries.height = game.height
+
     game.physics.friction.x = 0;
     game.physics.friction.y = 0.05;
 

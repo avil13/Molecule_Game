@@ -9,32 +9,33 @@ Molecule.module 'Barrel', (game)->
 
                     @sprite.animation.add 'barrel_green', {speed: 1, frames: [2]}
 
-                    @sprite.collides.boundaries = no
+                    @sprite.anchor.x = @sprite.width / 2
+                    @sprite.anchor.y = @sprite.height / 2
+                    @sprite.position.x = if @x != undefined then @x  else 100
+                    @sprite.position.y = if @y != undefined then @y  else 100
 
                     do @sprite.animation.stop
                     @sprite.animation.run 'wait'
 
-                    @sprite.collides.boundaries = on
-                    @sprite.position.x = 20
-                    @sprite.position.y = 200
-
-                    @sprite.anchor.x = @sprite.width / 2;
-                    @sprite.anchor.y = @sprite.height / 2;
+                    @sprite.acceleration.x = 1
 
                     return
 
                 update: ->
+                    if @sprite.collision.boundaries.left
+                        @sprite.acceleration.x = 1
+                    else if @sprite.collision.boundaries.right
+                        @sprite.acceleration.x = -1
 
-                    @sprite.acceleration.x = 0.1
 
+                    # debug
                     if @sprite.collision.sprite.id != null
                         sp_id = @sprite.collision.sprite.id
                         sp = game.sprite.get (sprite)->
                                 sprite if sprite.id == sp_id
-                        console.log sp[0].name
+                        console.log sp[0].name if sp && sp[0] && sp[0].name
 
                         @sprite.animation.run 'barrel_red', loop: no
-                        # game.remove @
 
                     if @sprite.animation.current.animation == 1 && @sprite.animation.end
                         game.molecule.add 'Boom', {x: @sprite.position.x, y: @sprite.position.y}
@@ -48,20 +49,14 @@ Molecule.module 'Boom', (game)->
                 sprite: game.sprite.create 'boom'
 
                 init: ->
-                    @sprite.position.x = if @x != undefined then @x  else -100
-                    @sprite.position.y = if @y != undefined then @y  else -100
 
-                    @sprite.anchor.x = @sprite.width / 2;
-                    @sprite.anchor.y = @sprite.height / 2;
+                    @sprite.anchor.x = @sprite.width / 2
+                    @sprite.anchor.y = @sprite.height / 2
+                    @sprite.position.x = (if @x? then @x  else -1000)
+                    @sprite.position.y = (if @y? then @y  else -1000)
+                    @sprite.animation.add 'fire', {speed: 0.6, frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
 
-                    @sprite.collides.sprite = false
-                    @sprite.collides.boundaries = false
-                    @sprite.collides.group = 0
-                    @sprite.scrollable = false
-
-                    @sprite.animation.add 'fire', {speed: 0.6, frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], loop: on}
-
-                    if @x && @y then @sprite.animation.run 'fire', {loop: no, reverse: no}
+                    @sprite.animation.run 'fire', {loop: no, reverse: no}
 
                     return
 

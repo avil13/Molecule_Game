@@ -7,9 +7,9 @@ Molecule.module 'Hero', (game)->
 
                     @sprite.animation.add 'wait', {frames: [0, 1, 2, 3, 4], speed: 0.7 }
 
-                    @sprite.animation.add 'jump', {frames: [6, 6, 7, 8, 9, 10], speed: 0.1 }
+                    @sprite.animation.add 'jump', {frames: [6, 6, 7, 7, 8, 9, 10], speed: 0.1 }
 
-                    @sprite.animation.add 'jump_up', {frames: [6, 6, 6, 7, 8, ], speed: 0.1 }
+                    @sprite.animation.add 'jump_up', {frames: [6, 6, 6, 7, 7, 8, ], speed: 0.1 }
 
                     @sprite.animation.add 'jump_down', {frames: [8, 9, 10], speed: 0.1 }
 
@@ -18,17 +18,16 @@ Molecule.module 'Hero', (game)->
                     @sprite.animation.add 'hit', {frames: [18, 19, 20, 21, 22], speed: 0.5 }
 
                     @sprite.collides.boundaries = on
+                    @sprite.scrollable = no
 
                     do @sprite.animation.stop
                     @sprite.animation.run 'wait', loop: on, reverse: no
 
-                    @sprite.scrollable = no
-
                     @sprite.position.x = 200 # game.canvas.width / 4
-                    @sprite.position.y = 200 # game.canvas.height / 2
+                    @sprite.position.y = 400 # game.canvas.height / 2
 
-                    @sprite.anchor.x = @sprite.width / 2;
-                    @sprite.anchor.y = @sprite.height / 2;
+                    @sprite.anchor.x = @sprite.width / 2
+                    @sprite.anchor.y = @sprite.height / 2
 
                     # console.log @sprite
                     return
